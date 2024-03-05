@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrankIO.Auth", "src\Hosts\DrankIO.Auth\DrankIO.Auth.csproj", "{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrankIO.Domain", "src\Core\DrankIO.Domain\DrankIO.Domain.csproj", "{57E5DBC1-654E-4E7E-9B02-52A745C5371C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E5DBC1-654E-4E7E-9B02-52A745C5371C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E5DBC1-654E-4E7E-9B02-52A745C5371C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E5DBC1-654E-4E7E-9B02-52A745C5371C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E5DBC1-654E-4E7E-9B02-52A745C5371C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAC747CE-AA48-4FDC-8974-AE8141FCB789}
+	EndGlobalSection
+EndGlobal
