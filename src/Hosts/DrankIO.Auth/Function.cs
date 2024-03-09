@@ -13,6 +13,8 @@ namespace DrankIO.Auth
                 PropertyNameCaseInsensitive = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             });
+
+            return new APIGatewayProxyResponse();
         }
     }
 }

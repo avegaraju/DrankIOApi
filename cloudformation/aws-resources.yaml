@@ -7,11 +7,14 @@ Parameters:
   GoogleClientId:
     Type: String
     Description: Google Client ID for Federation
+  Environment:
+    Type: String
+    Description: Execution environment
 Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Ref UserPoolName
+      UserPoolName: !Sub "${UserPoolName}-${Environment}"
       AutoVerifiedAttributes:
         - email
       MfaConfiguration: OFF
@@ -25,7 +28,7 @@ Resources:
   CognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: "ReactAppClient"
+      ClientName: "DrankIOAppClient"
       UserPoolId: !Ref CognitoUserPool
       GenerateSecret: false
       ExplicitAuthFlows:
@@ -38,7 +41,7 @@ Resources:
   CognitoUserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: !Sub "${UserPoolName}-domain"
+      Domain: !Sub "${UserPoolName}-${Environment}-domain"
       UserPoolId: !Ref CognitoUserPool
   CognitoIdentityProviderGoogle:
     Type: AWS::Cognito::UserPoolIdentityProvider

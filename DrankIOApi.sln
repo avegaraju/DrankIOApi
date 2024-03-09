@@ -9,10 +9,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrankIO.Domain", "src\Core\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cloudformation", "Cloudformation", "{F90097A6-F502-4A91-B254-13FE8CC033FC}"
 	ProjectSection(SolutionItems) = preProject
+		cloudformation\aws-iam.yaml = cloudformation\aws-iam.yaml
 		aws-resources.yaml = aws-resources.yaml
+		cloudformation\aws-resources.yaml = cloudformation\aws-resources.yaml
 		common-parameters.json = common-parameters.json
+		cloudformation\common-parameters.json = cloudformation\common-parameters.json
 		production-parameters.json = production-parameters.json
+		cloudformation\production-parameters.json = cloudformation\production-parameters.json
 		testing-paramters.json = testing-paramters.json
+		cloudformation\testing-paramters.json = cloudformation\testing-paramters.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7F39AE45-8223-41FD-8A66-85E147AA7602}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\deploy.yml = .github\workflows\deploy.yml
 	EndProjectSection
 EndProject
 Global

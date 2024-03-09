@@ -1,0 +1,39 @@
+name: AWS CDK Deploy
+
+on:
+  pull_request:
+    types: [ closed ]
+  workflow_dispatch:
+
+jobs:
+  deploy_testing:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TESTING }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TESTING }}
+        aws-region: eu-west-1
+
+    - name: Deploy CloudFormation stack to Testing
+      run: |
+        aws cloudformation deploy \
+        --template-file aws-resources.yaml \
+        --stack-name TestingStack \
+        --capabilities CAPABILITY_IAM \
+        --region eu-west-1 \
+        --parameter-overrides file://../Cloudformation/common-parameters.json file://../Cloudformation/testing-parameters.json
