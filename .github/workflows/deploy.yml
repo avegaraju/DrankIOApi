@@ -1,4 +1,4 @@
-name: AWS CDK Deploy
+name: AWS Cloudformation Deploy
 
 on:
   pull_request:
