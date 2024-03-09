@@ -1,0 +1,49 @@
+﻿AWSTemplateFormatVersion: "2010-09-09"
+Transform: 'AWS::Include'
+Parameters:
+  UserPoolName:
+    Type: String
+    Description: Name for the Cognito User Pool
+  GoogleClientId:
+    Type: String
+    Description: Google Client ID for Federation
+Resources:
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Ref UserPoolName
+      AutoVerifiedAttributes:
+        - email
+      MfaConfiguration: OFF
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: "ReactAppClient"
+      UserPoolId: !Ref CognitoUserPool
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ADMIN_NO_SRP_AUTH
+        - USER_PASSWORD_AUTH
+        - ALLOW_CUSTOM_AUTH
+      SupportedIdentityProviders:
+        - COGNITO
+        - Google
+  CognitoUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Sub "${UserPoolName}-domain"
+      UserPoolId: !Ref CognitoUserPool
+  CognitoIdentityProviderGoogle:
+    Type: AWS::Cognito::UserPoolIdentityProvider
+    Properties:
+      ProviderName: "Google"
+      ProviderType: "Google"
+      UserPoolId: !Ref CognitoUserPool
+      ClientId: !Ref GoogleClientId
