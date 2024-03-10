@@ -1,5 +1,4 @@
 ﻿AWSTemplateFormatVersion: "2010-09-09"
-Transform: 'AWS::Include'
 Parameters:
   UserPoolName:
     Type: String
