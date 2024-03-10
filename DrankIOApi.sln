@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cloudformation", "Cloudform
 		cloudformation\aws-resources.yaml = cloudformation\aws-resources.yaml
 		cloudformation\common-parameters.json = cloudformation\common-parameters.json
 		cloudformation\production-parameters.json = cloudformation\production-parameters.json
-		cloudformation\testing-paramters.json = cloudformation\testing-paramters.json
+		cloudformation\testing-parameters.json = cloudformation\testing-parameters.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7F39AE45-8223-41FD-8A66-85E147AA7602}"
