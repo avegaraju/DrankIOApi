@@ -26,8 +26,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Convert Parameters File
       run: |
-        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' Cloudformation/common-parameters.json > combined-parameters.txt
-        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' Cloudformation/testing-parameters.json >> combined-parameters.txt
+        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' cloudformation/common-parameters.json > combined-parameters.txt
+        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' cloudformation/testing-parameters.json >> combined-parameters.txt
 
     - name: Set up AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
