@@ -40,3 +40,4 @@ jobs:
         --stack-name TestingStack \
         --capabilities CAPABILITY_IAM \
         --region eu-west-1 \
+        --parameter-overrides UserPoolName=drankio-pool-testing GoogleClientId=467788471028-bad2dleh0qug0qtn9v895ued7vg91hgv.apps.googleusercontent.com
