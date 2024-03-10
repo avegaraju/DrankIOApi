@@ -1,6 +1,6 @@
 [
   {
-    "ParameterKey": "Environment",
-    "PatameterValue": "testing"
+    "ParameterKey": "UserPoolName",
+    "PatameterValue": "drankio-pool-testing"
   }
 ]

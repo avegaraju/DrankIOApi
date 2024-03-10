@@ -7,14 +7,11 @@ Parameters:
   GoogleClientId:
     Type: String
     Description: Google Client ID for Federation
-  Environment:
-    Type: String
-    Description: Execution environment
 Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Sub "${UserPoolName}-${Environment}"
+      UserPoolName: !Ref UserPoolName
       AutoVerifiedAttributes:
         - email
       MfaConfiguration: OFF
@@ -41,7 +38,7 @@ Resources:
   CognitoUserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: !Sub "${UserPoolName}-${Environment}-domain"
+      Domain: !Sub "${UserPoolName}-domain"
       UserPoolId: !Ref CognitoUserPool
   CognitoIdentityProviderGoogle:
     Type: AWS::Cognito::UserPoolIdentityProvider

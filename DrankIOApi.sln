@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cloudformation", "Cloudform
 	ProjectSection(SolutionItems) = preProject
 		cloudformation\aws-iam.yaml = cloudformation\aws-iam.yaml
 		cloudformation\aws-resources.yaml = cloudformation\aws-resources.yaml
-		cloudformation\common-parameters.json = cloudformation\common-parameters.json
 		cloudformation\production-parameters.json = cloudformation\production-parameters.json
 		cloudformation\testing-parameters.json = cloudformation\testing-parameters.json
 	EndProjectSection

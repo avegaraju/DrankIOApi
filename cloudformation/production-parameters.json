@@ -1,6 +1,6 @@
 [
   {
-    "ParameterKey": "Environment",
-    "PatameterValue": "production"
+    "ParameterKey": "UserPoolName",
+    "PatameterValue": "drankio-pool-production"
   }
 ]
