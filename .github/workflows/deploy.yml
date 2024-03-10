@@ -36,8 +36,8 @@ jobs:
     - name: Deploy CloudFormation stack to Testing
       run: |
         aws cloudformation deploy \
-        --template-file ../Cloudformation/aws-resources.yaml \
+        --template-file Cloudformation/aws-resources.yaml \
         --stack-name TestingStack \
         --capabilities CAPABILITY_IAM \
         --region eu-west-1 \
-        --parameter-overrides file://../Cloudformation/common-parameters.json file://../Cloudformation/testing-parameters.json
+        --parameter-overrides file://Cloudformation/common-parameters.json file://Cloudformation/testing-parameters.json
