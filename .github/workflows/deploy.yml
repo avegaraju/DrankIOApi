@@ -24,6 +24,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Convert Parameters File
+      run: |
+        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' Cloudformation/common-parameters.json > combined-parameters.txt
+        jq -r '.[] | "\(.ParameterKey)=\(.ParameterValue)"' Cloudformation/testing-parameters.json >> combined-parameters.txt
+
     - name: Set up AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -40,4 +45,4 @@ jobs:
         --stack-name TestingStack \
         --capabilities CAPABILITY_IAM \
         --region eu-west-1 \
-        --parameter-overrides file://cloudformation/common-parameters.json file://cloudformation/testing-parameters.json
+        --parameter-overrides file://combined-parameters.txt
