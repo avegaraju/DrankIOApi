@@ -21,24 +21,14 @@ Resources:
           RequireNumbers: true
           RequireSymbols: true
           RequireUppercase: true
+
   CognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
       ClientName: "DrankIOAppClient"
       UserPoolId: !Ref CognitoUserPool
       GenerateSecret: false
-      ExplicitAuthFlows:
-        - ADMIN_NO_SRP_AUTH
-        - USER_PASSWORD_AUTH
-        - ALLOW_CUSTOM_AUTH
-      SupportedIdentityProviders:
-        - COGNITO
-        - Google
-  CognitoUserPoolDomain:
-    Type: AWS::Cognito::UserPoolDomain
-    Properties:
-      Domain: !Sub "${UserPoolName}-domain"
-      UserPoolId: !Ref CognitoUserPool
+  
   CognitoIdentityProviderGoogle:
     Type: AWS::Cognito::UserPoolIdentityProvider
     Properties:
@@ -46,3 +36,8 @@ Resources:
       ProviderType: "Google"
       UserPoolId: !Ref CognitoUserPool
       ClientId: !Ref GoogleClientId
+      AttributeMapping:
+        email: 'email'
+        name: 'name'
+        given_name: 'given_name'
+        family_name: 'family_name'
