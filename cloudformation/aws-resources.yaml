@@ -35,7 +35,8 @@ Resources:
       ProviderName: "Google"
       ProviderType: "Google"
       UserPoolId: !Ref CognitoUserPool
-      ClientId: !Ref GoogleClientId
+      ProviderDetails:
+        client_id: !Ref GoogleClientId
       AttributeMapping:
         email: 'email'
         name: 'name'
