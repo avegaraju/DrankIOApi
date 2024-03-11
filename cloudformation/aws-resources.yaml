@@ -6,6 +6,13 @@ Parameters:
   GoogleClientId:
     Type: String
     Description: Google Client ID for Federation
+  GoogleAuthorizeScopes:
+    Type: String
+    Description: OAuth 2.0 scopes
+    Default: 'openid profile email'
+  GoogleClientSecret:
+    Type: String
+    Description: Client secret for Google
 Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
@@ -37,6 +44,8 @@ Resources:
       UserPoolId: !Ref CognitoUserPool
       ProviderDetails:
         client_id: !Ref GoogleClientId
+        client_secret: !Ref GoogleClientSecret
+        authorize_scopes: !Ref GoogleAuthorizeScopes
       AttributeMapping:
         email: 'email'
         name: 'name'
