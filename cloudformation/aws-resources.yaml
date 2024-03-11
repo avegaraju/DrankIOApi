@@ -35,6 +35,8 @@ Resources:
       ClientName: "DrankIOAppClient"
       UserPoolId: !Ref CognitoUserPool
       GenerateSecret: false
+      CallbackURLs:
+        - https://localhost:3000
   
   CognitoIdentityProviderGoogle:
     Type: AWS::Cognito::UserPoolIdentityProvider
