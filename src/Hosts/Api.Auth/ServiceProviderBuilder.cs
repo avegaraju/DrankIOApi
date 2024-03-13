@@ -1,7 +1,9 @@
 ﻿using Amazon.CognitoIdentityProvider;
+using Domain.Ports;
 using DrankIO.Adapters.Cognito;
 using DrankIO.Domain.Ports;
 using DrankIO.Domain.Users;
+using Google;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -23,6 +25,7 @@ namespace DrankIO.Auth
         {
             IAmazonCognitoIdentityProvider client = new AmazonCognitoIdentityProviderClient();
             serviceCollection.AddTransient<ICognitoClient>(_=> new CognitoClient(client));
+            serviceCollection.AddTransient<IGoogleApiClient, GoogleApiClient>();
             serviceCollection.AddTransient<IRegisterUserUseCase, RegisterUserUseCase>();
         }
     }

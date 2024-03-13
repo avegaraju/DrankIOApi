@@ -12,6 +12,7 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Adapters\Cognito\Cognito.csproj" />
+      <ProjectReference Include="..\..\Adapters\Google\Google.csproj" />
       <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
     </ItemGroup>
 </Project>

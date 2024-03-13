@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Text.Json;
 using Amazon.Lambda.Core;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.

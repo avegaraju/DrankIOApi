@@ -1,4 +1,7 @@
-﻿namespace DrankIO.Domain.Users
+﻿using Domain.Ports;
+using DrankIO.Domain.Ports;
+
+namespace DrankIO.Domain.Users
 {
     public interface IRegisterUserUseCase
     {
@@ -7,6 +10,14 @@
 
     public class RegisterUserUseCase : IRegisterUserUseCase
     {
+        public RegisterUserUseCase(
+            ICognitoClient cognitoClient,
+            IGoogleApiClient googleApiClient
+            )
+        {
+
+        }
+
         public void ExecuteAsync(string email, string accessCode)
         {
             throw new NotImplementedException();
