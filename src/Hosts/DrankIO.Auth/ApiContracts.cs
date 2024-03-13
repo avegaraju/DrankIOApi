@@ -1,5 +1,5 @@
 ﻿namespace DrankIO.Auth
 {
-    public record class GoogleAuthApiRequest(string Code);
+    public record class GoogleRegisterUserApiRequest(string Code);
 }
 

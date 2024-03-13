@@ -7,5 +7,11 @@
     <ItemGroup>
         <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.3.1" />
         <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.6.0" />
+        <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.7.303.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Adapters\DrankIO.Adapters.Cognito\DrankIO.Adapters.Cognito.csproj" />
+      <ProjectReference Include="..\..\Core\DrankIO.Domain\DrankIO.Domain.csproj" />
     </ItemGroup>
 </Project>
