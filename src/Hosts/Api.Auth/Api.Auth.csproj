@@ -11,7 +11,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\Adapters\DrankIO.Adapters.Cognito\DrankIO.Adapters.Cognito.csproj" />
-      <ProjectReference Include="..\..\Core\DrankIO.Domain\DrankIO.Domain.csproj" />
+      <ProjectReference Include="..\..\Adapters\Cognito\Cognito.csproj" />
+      <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
     </ItemGroup>
 </Project>

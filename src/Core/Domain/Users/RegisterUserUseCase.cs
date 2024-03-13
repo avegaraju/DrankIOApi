@@ -5,7 +5,7 @@
         void ExecuteAsync(string email, string accessCode);
     }
 
-    internal class RegisterUserUseCase : IRegisterUserUseCase
+    public class RegisterUserUseCase : IRegisterUserUseCase
     {
         public void ExecuteAsync(string email, string accessCode)
         {

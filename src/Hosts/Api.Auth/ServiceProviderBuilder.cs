@@ -1,6 +1,7 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using DrankIO.Adapters.Cognito;
 using DrankIO.Domain.Ports;
+using DrankIO.Domain.Users;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

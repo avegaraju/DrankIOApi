@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrankIO.Auth", "src\Hosts\DrankIO.Auth\DrankIO.Auth.csproj", "{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Auth", "src\Hosts\Api.Auth\Api.Auth.csproj", "{7AD5706F-1AE0-43C8-81B0-B2ED6C565E6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrankIO.Domain", "src\Core\DrankIO.Domain\DrankIO.Domain.csproj", "{57E5DBC1-654E-4E7E-9B02-52A745C5371C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Core\Domain\Domain.csproj", "{57E5DBC1-654E-4E7E-9B02-52A745C5371C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cloudformation", "Cloudformation", "{F90097A6-F502-4A91-B254-13FE8CC033FC}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7F39
 		.github\workflows\deploy.yml = .github\workflows\deploy.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrankIO.Adapters.Cognito", "src\Adapters\DrankIO.Adapters.Cognito\DrankIO.Adapters.Cognito.csproj", "{B339E178-3187-45AF-87D8-811817FB7065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.Cognito", "src\Adapters\Cognito\Cognito.csproj", "{B339E178-3187-45AF-87D8-811817FB7065}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
