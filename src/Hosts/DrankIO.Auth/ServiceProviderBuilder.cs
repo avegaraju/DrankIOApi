@@ -21,7 +21,8 @@ namespace DrankIO.Auth
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             IAmazonCognitoIdentityProvider client = new AmazonCognitoIdentityProviderClient();
-            serviceCollection.AddTransient<ICognitoClient, CognitoClient>();
+            serviceCollection.AddTransient<ICognitoClient>(_=> new CognitoClient(client));
+            serviceCollection.AddTransient<IRegisterUserUseCase, RegisterUserUseCase>();
         }
     }
 }
