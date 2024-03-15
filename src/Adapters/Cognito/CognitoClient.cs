@@ -1,5 +1,6 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using DrankIO.Domain.Ports;
+using System.Threading.Tasks;
 
 namespace DrankIO.Adapters.Cognito
 {
@@ -12,9 +13,9 @@ namespace DrankIO.Adapters.Cognito
             this._client = client;
         }
 
-        public void RegisterUser(string email)
+        public Task RegisterUser(string email)
         {
-
+            throw new System.NotImplementedException();
         }
     }
 }

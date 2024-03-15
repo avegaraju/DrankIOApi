@@ -10,7 +10,7 @@ namespace Google
         {
            _client = httpClient();
         }
-        public void Validate(string accessCode)
+        public Task Validate(string accessCode)
         {
             throw new NotImplementedException();
         }
