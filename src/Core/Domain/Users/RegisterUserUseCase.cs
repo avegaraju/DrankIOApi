@@ -26,7 +26,7 @@ namespace DrankIO.Domain.Users
         {
             try
             {
-                _googleApiClient.Validate(accessCode);
+                _googleApiClient.GetUser(email);
             }
             catch ( Exception ex ) {
                 throw;

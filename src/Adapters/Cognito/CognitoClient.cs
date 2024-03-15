@@ -17,5 +17,10 @@ namespace DrankIO.Adapters.Cognito
         {
             throw new System.NotImplementedException();
         }
+
+        public Task Validate(string accessCode)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Domain.Tests
 
         private void SetupForSuccess()
         {
-            _googleApiClientMock.Setup(x=> x.Validate(It.IsAny<string>()))
+            _googleApiClientMock.Setup(x=> x.GetUser(It.IsAny<string>()))
                 .Returns(Task.CompletedTask);
             _cognitoClientMock.Setup(x => x.RegisterUser(It.IsAny<string>()))
                 .Returns(Task.CompletedTask);
@@ -38,7 +38,7 @@ namespace Domain.Tests
 
             sut.ExecuteAsync(email, accessCode);
 
-            _googleApiClientMock.Verify(x=> x.Validate(accessCode), Times.Once());
+            _googleApiClientMock.Verify(x=> x.GetUser(email), Times.Once());
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Domain.Tests
             string accessCode = _fixture.Create<string>();
             string exceptionMessage = _fixture.Create<string>();
 
-            _googleApiClientMock.Setup(x => x.Validate(It.IsAny<string>()))
+            _googleApiClientMock.Setup(x => x.GetUser(It.IsAny<string>()))
                 .Throws(new InvalidOperationException(exceptionMessage));
 
             var sut = CreateSut();
@@ -56,6 +56,7 @@ namespace Domain.Tests
             await sut.Awaiting(x=> x.ExecuteAsync(email, accessCode))
                 .Should().ThrowAsync<Exception>();
         }
+
 
         private IRegisterUserUseCase CreateSut() =>
             new RegisterUserUseCase(_cognitoClientMock.Object, _googleApiClientMock.Object);
