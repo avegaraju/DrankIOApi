@@ -2,6 +2,6 @@
 {
     public interface ICognitoClient
     {
-        void RegisterUser(string email);
+        Task RegisterUser(string email);
     }
 }

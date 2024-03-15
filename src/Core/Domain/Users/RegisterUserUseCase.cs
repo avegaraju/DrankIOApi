@@ -5,22 +5,34 @@ namespace DrankIO.Domain.Users
 {
     public interface IRegisterUserUseCase
     {
-        void ExecuteAsync(string email, string accessCode);
+        Task ExecuteAsync(string email, string accessCode);
     }
 
     public class RegisterUserUseCase : IRegisterUserUseCase
     {
+        private readonly ICognitoClient _cognitoClient;
+        private readonly IGoogleApiClient _googleApiClient;
+
         public RegisterUserUseCase(
             ICognitoClient cognitoClient,
             IGoogleApiClient googleApiClient
             )
         {
-
+            _cognitoClient = cognitoClient;
+            _googleApiClient = googleApiClient;
         }
 
-        public void ExecuteAsync(string email, string accessCode)
+        public Task ExecuteAsync(string email, string accessCode)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _googleApiClient.Validate(accessCode);
+            }
+            catch ( Exception ex ) {
+                throw;
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

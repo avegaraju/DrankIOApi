@@ -2,6 +2,6 @@
 {
     public interface IGoogleApiClient
     {
-        void Validate(string accessCode);
+        Task Validate(string accessCode);
     }
 }
