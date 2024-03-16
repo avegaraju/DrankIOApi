@@ -62,7 +62,19 @@ namespace Domain.Tests
             await sut.Awaiting(x=> x.ExecuteAsync(_bearerToken))
                 .Should().ThrowAsync<Exception>();
         }
-       
+
+        [Fact]
+        public void ExecuteAsync_CallsCognitoToRegisterUser()
+        {
+            string accessCode = _fixture.Create<string>();
+
+            var sut = CreateSut();
+
+            sut.ExecuteAsync(_bearerToken);
+
+            _cognitoClientMock.Verify(x => x.RegisterUser(_user.emailAddress, _user.Id), Times.Once());
+        }
+
         private IRegisterUserUseCase CreateSut() =>
             new RegisterUserUseCase(_googleApiClientMock.Object, _cognitoClientMock.Object);
     }

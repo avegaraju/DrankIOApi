@@ -35,11 +35,16 @@ namespace DrankIO.Domain.Users
                     throw new UserInformationNotFoundException();
                 }
 
-
+                await RegisterUser(user);
             }
             catch (Exception ex ) {
                 throw;
             }
+        }
+
+        private async Task RegisterUser(User user)
+        {
+            await _cognitoClient.RegisterUser(user.emailAddress, user.Id);
         }
     }
 }
