@@ -6,7 +6,6 @@ using DrankIO.Domain.Users;
 using FluentAssertions;
 using Moq;
 using System;
-using System.Threading.Tasks;
 
 namespace Domain.Tests
 {
@@ -20,6 +19,7 @@ namespace Domain.Tests
 
         public RegisterUserUseCaseTests()
         {
+            _fixture.Register<DateOnly>(()=> new DateOnly());
             SetupForSuccess();
         }
 
