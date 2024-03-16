@@ -12,7 +12,7 @@ namespace Google
            _client = httpClient();
         }
 
-        Task<User> IGoogleApiClient.GetUser(string email)
+        Task<User> IGoogleApiClient.GetUser(string bearerToken)
         {
             throw new NotImplementedException();
         }

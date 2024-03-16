@@ -5,6 +5,6 @@ namespace Domain.Ports
 {
     public interface IGoogleApiClient
     {
-        Task<User> GetUser(string email);
+        Task<User> GetUser(string bearerToken);
     }
 }

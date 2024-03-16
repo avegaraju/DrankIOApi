@@ -7,7 +7,7 @@ namespace DrankIO.Domain.Users
 {
     public interface IRegisterUserUseCase
     {
-        Task ExecuteAsync(string email);
+        Task ExecuteAsync(string accessCode);
     }
 
     public class RegisterUserUseCase : IRegisterUserUseCase
@@ -24,17 +24,17 @@ namespace DrankIO.Domain.Users
             _googleApiClient = googleApiClient;
         }
 
-        public Task ExecuteAsync(string email)
+        public async Task ExecuteAsync(string accessCode)
         {
             try
             {
-                var user = _googleApiClient.GetUser(email);
+                var bearerToken = await _cognitoClient.GetToken(accessCode);
+
+                var user = await _googleApiClient.GetUser(bearerToken);
             }
             catch (Exception ex ) {
                 throw;
             }
-
-            return Task.CompletedTask;
         }
     }
 }
