@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DrankIO.Adapters.Cognito
 {
-    public class CognitoClient: ICognitoClient
+    public class CognitoClient : ICognitoClient
     {
         private readonly IAmazonCognitoIdentityProvider _client;
 
@@ -13,12 +13,7 @@ namespace DrankIO.Adapters.Cognito
             this._client = client;
         }
 
-        public Task RegisterUser(string email)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task Validate(string accessCode)
+        Task<string> ICognitoClient.GetToken(string accessCode)
         {
             throw new System.NotImplementedException();
         }

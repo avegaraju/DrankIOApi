@@ -1,5 +1,6 @@
 using AutoFixture;
 using Domain.Ports;
+using Domain.Users;
 using DrankIO.Domain.Ports;
 using DrankIO.Domain.Users;
 using FluentAssertions;
@@ -14,6 +15,8 @@ namespace Domain.Tests
         private readonly Fixture _fixture = new();
         Mock<ICognitoClient> _cognitoClientMock = new(MockBehavior.Strict);
         Mock<IGoogleApiClient> _googleApiClientMock = new(MockBehavior.Strict);
+        User _user;
+        string _token;
 
         public RegisterUserUseCaseTests()
         {
@@ -22,21 +25,24 @@ namespace Domain.Tests
 
         private void SetupForSuccess()
         {
+            _user = _fixture.Create<User>();
+            _token = _fixture.Create<string>();
+
             _googleApiClientMock.Setup(x=> x.GetUser(It.IsAny<string>()))
-                .Returns(Task.CompletedTask);
-            _cognitoClientMock.Setup(x => x.RegisterUser(It.IsAny<string>()))
-                .Returns(Task.CompletedTask);
+                .ReturnsAsync(_user);
+            _cognitoClientMock.Setup(x => x.GetToken(It.IsAny<string>()))
+                .ReturnsAsync(_token);
         }
 
         [Fact]
-        public void ExecuteAsync_InvokesGoogleClient()
+        public void ExecuteAsync_GetsUserInformation()
         {
             string email = _fixture.Create<string>();
             string accessCode = _fixture.Create<string>();
 
             var sut = CreateSut();
 
-            sut.ExecuteAsync(email, accessCode);
+            sut.ExecuteAsync(email);
 
             _googleApiClientMock.Verify(x=> x.GetUser(email), Times.Once());
         }
@@ -53,10 +59,9 @@ namespace Domain.Tests
 
             var sut = CreateSut();
 
-            await sut.Awaiting(x=> x.ExecuteAsync(email, accessCode))
+            await sut.Awaiting(x=> x.ExecuteAsync(email))
                 .Should().ThrowAsync<Exception>();
         }
-
 
         private IRegisterUserUseCase CreateSut() =>
             new RegisterUserUseCase(_cognitoClientMock.Object, _googleApiClientMock.Object);

@@ -1,8 +1,9 @@
-﻿namespace DrankIO.Domain.Ports
+﻿using System.Threading.Tasks;
+
+namespace DrankIO.Domain.Ports
 {
     public interface ICognitoClient
     {
-        Task RegisterUser(string email);
-        Task Validate(string accessCode);
+        Task<string> GetToken(string accessCode);
     }
 }

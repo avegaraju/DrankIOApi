@@ -1,4 +1,6 @@
-﻿namespace DrankIO.Domain
+﻿using System;
+
+namespace DrankIO.Domain
 {
     public interface IGetGoogleAccessToken
     {

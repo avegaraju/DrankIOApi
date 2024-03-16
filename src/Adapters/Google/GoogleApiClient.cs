@@ -1,4 +1,5 @@
 ﻿using Domain.Ports;
+using Domain.Users;
 
 namespace Google
 {
@@ -10,7 +11,8 @@ namespace Google
         {
            _client = httpClient();
         }
-        public Task GetUser(string accessCode)
+
+        Task<User> IGoogleApiClient.GetUser(string email)
         {
             throw new NotImplementedException();
         }

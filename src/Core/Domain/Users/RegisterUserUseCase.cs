@@ -1,11 +1,13 @@
 ﻿using Domain.Ports;
 using DrankIO.Domain.Ports;
+using System;
+using System.Threading.Tasks;
 
 namespace DrankIO.Domain.Users
 {
     public interface IRegisterUserUseCase
     {
-        Task ExecuteAsync(string email, string accessCode);
+        Task ExecuteAsync(string email);
     }
 
     public class RegisterUserUseCase : IRegisterUserUseCase
@@ -22,13 +24,13 @@ namespace DrankIO.Domain.Users
             _googleApiClient = googleApiClient;
         }
 
-        public Task ExecuteAsync(string email, string accessCode)
+        public Task ExecuteAsync(string email)
         {
             try
             {
-                _googleApiClient.GetUser(email);
+                var user = _googleApiClient.GetUser(email);
             }
-            catch ( Exception ex ) {
+            catch (Exception ex ) {
                 throw;
             }
 
