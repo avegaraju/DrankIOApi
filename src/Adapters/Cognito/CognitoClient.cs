@@ -13,6 +13,11 @@ namespace DrankIO.Adapters.Cognito
             this._client = client;
         }
 
+        public Task RegisterUser(string emailAddress, string userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         Task<string> ICognitoClient.GetToken(string accessCode)
         {
             throw new System.NotImplementedException();

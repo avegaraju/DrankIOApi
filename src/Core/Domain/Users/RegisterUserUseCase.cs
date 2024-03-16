@@ -1,4 +1,5 @@
 ﻿using Domain.Ports;
+using Domain.Users;
 using DrankIO.Domain.Ports;
 using System;
 using System.Threading.Tasks;
@@ -12,25 +13,29 @@ namespace DrankIO.Domain.Users
 
     public class RegisterUserUseCase : IRegisterUserUseCase
     {
-        private readonly ICognitoClient _cognitoClient;
         private readonly IGoogleApiClient _googleApiClient;
+        private readonly ICognitoClient _cognitoClient;
 
         public RegisterUserUseCase(
-            ICognitoClient cognitoClient,
-            IGoogleApiClient googleApiClient
+            IGoogleApiClient googleApiClient,
+            ICognitoClient cognitoClient
             )
         {
-            _cognitoClient = cognitoClient;
             _googleApiClient = googleApiClient;
+            _cognitoClient = cognitoClient;
         }
 
-        public async Task ExecuteAsync(string accessCode)
+        public async Task ExecuteAsync(string bearerToken)
         {
             try
             {
-                var bearerToken = await _cognitoClient.GetToken(accessCode);
-
                 var user = await _googleApiClient.GetUser(bearerToken);
+                if (user == null)
+                {
+                    throw new UserInformationNotFoundException();
+                }
+
+
             }
             catch (Exception ex ) {
                 throw;

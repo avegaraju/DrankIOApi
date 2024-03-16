@@ -13,11 +13,10 @@ namespace Domain.Tests
     public class RegisterUserUseCaseTests
     {
         private readonly Fixture _fixture = new();
-        Mock<ICognitoClient> _cognitoClientMock = new(MockBehavior.Strict);
         Mock<IGoogleApiClient> _googleApiClientMock = new(MockBehavior.Strict);
+        Mock<ICognitoClient> _cognitoClientMock = new(MockBehavior.Strict);
         User _user;
-        string _token;
-        string _accessCode;
+        string _bearerToken;
 
         public RegisterUserUseCaseTests()
         {
@@ -28,13 +27,13 @@ namespace Domain.Tests
         private void SetupForSuccess()
         {
             _user = _fixture.Create<User>();
-            _token = _fixture.Create<string>();
-            _accessCode = _fixture.Create<string>();
+            _bearerToken = _fixture.Create<string>();
 
             _googleApiClientMock.Setup(x=> x.GetUser(It.IsAny<string>()))
                 .ReturnsAsync(_user);
-            _cognitoClientMock.Setup(x => x.GetToken(It.IsAny<string>()))
-                .ReturnsAsync(_token);
+            _cognitoClientMock
+                .Setup(x => x.RegisterUser(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.CompletedTask);
         }
 
         [Fact]
@@ -44,9 +43,9 @@ namespace Domain.Tests
 
             var sut = CreateSut();
 
-            sut.ExecuteAsync(_accessCode);
+            sut.ExecuteAsync(_bearerToken);
 
-            _googleApiClientMock.Verify(x=> x.GetUser(_token), Times.Once());
+            _googleApiClientMock.Verify(x=> x.GetUser(_bearerToken), Times.Once());
         }
 
         [Fact]
@@ -60,38 +59,11 @@ namespace Domain.Tests
 
             var sut = CreateSut();
 
-            await sut.Awaiting(x=> x.ExecuteAsync(_accessCode))
+            await sut.Awaiting(x=> x.ExecuteAsync(_bearerToken))
                 .Should().ThrowAsync<Exception>();
         }
-
-        [Fact]
-        public void ExecuteAsync_CallsCognitoClientForBearerToken()
-        {
-            var sut = CreateSut();
-
-            sut.ExecuteAsync(_accessCode);
-
-            _cognitoClientMock.Verify(x => x.GetToken(_accessCode), Times.Once);
-        }
-
-        [Fact]
-        public async Task ExecuteAsync_WhenCognitoClientThrows_Throws()
-        {
-            _cognitoClientMock.Setup(
-                x => x.GetToken(It.IsAny<string>()))
-                .ThrowsAsync(new InvalidOperationException()
-                );
-
-            var sut = CreateSut();
-
-            await sut.Awaiting(
-                x=>x.ExecuteAsync(_accessCode)
-                )
-                .Should()
-                .ThrowAsync<InvalidOperationException>();
-        }
-
+       
         private IRegisterUserUseCase CreateSut() =>
-            new RegisterUserUseCase(_cognitoClientMock.Object, _googleApiClientMock.Object);
+            new RegisterUserUseCase(_googleApiClientMock.Object, _cognitoClientMock.Object);
     }
 }
