@@ -30,9 +30,10 @@ namespace DrankIO.Domain.Users
             try
             {
                 var user = await _googleApiClient.GetUser(bearerToken);
+                
                 if (user == null)
                 {
-                    throw new UserInformationNotFoundException();
+                    throw new UserInformationNotFoundException($"{nameof(user)} is null.");
                 }
 
                 await RegisterUser(user);

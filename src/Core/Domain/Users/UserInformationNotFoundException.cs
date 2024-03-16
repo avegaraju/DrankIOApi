@@ -4,8 +4,8 @@ namespace Domain.Users
 {
     public class UserInformationNotFoundException: Exception
     {
-        public UserInformationNotFoundException()
-            :base("User information not accessible.")
+        public UserInformationNotFoundException(string message)
+            :base($"User information not accessible. {message}")
         {
             
         }
