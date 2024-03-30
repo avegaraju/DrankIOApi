@@ -1,10 +1,9 @@
 ﻿using Domain.Ports;
 using Domain.Users;
-using DrankIO.Domain.Ports;
 using System;
 using System.Threading.Tasks;
 
-namespace DrankIO.Domain.Users
+namespace Domain.Users
 {
     public interface IRegisterUserUseCase
     {

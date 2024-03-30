@@ -1,13 +1,15 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using Domain.Ports;
-using DrankIO.Adapters.Cognito;
-using DrankIO.Domain.Ports;
-using DrankIO.Domain.Users;
+using Cognito;
+using Domain.Users;
 using Google;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Api.Auth;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
-namespace DrankIO.Auth
+namespace Auth
 {
     internal static class ServiceProviderBuilder
     {
@@ -16,15 +18,40 @@ namespace DrankIO.Auth
             IServiceCollection serviceCollection
                 = new ServiceCollection();
 
-            ConfigureServices(serviceCollection);
+            var settings = BuildSettings();
+
+            ConfigureServices(serviceCollection, settings);
 
             return serviceCollection.BuildServiceProvider();
         }
 
-        private static void ConfigureServices(IServiceCollection serviceCollection)
+        private static LambdaSettings BuildSettings()
+        {
+            IConfigurationBuilder configurationBuilder =
+               new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory());
+
+            if (ApplicationEnvironment.IsDevelopment())
+                configurationBuilder.AddUserSecrets<LambdaSettings>();
+
+            configurationBuilder.AddEnvironmentVariables("DOTNET_")
+                .AddEnvironmentVariables();
+
+            IConfiguration configuration = configurationBuilder.Build();
+
+            return configuration.Get<LambdaSettings>();
+        }
+
+        private static void ConfigureServices(
+            IServiceCollection serviceCollection,
+            LambdaSettings settings
+            )
         {
             IAmazonCognitoIdentityProvider client = new AmazonCognitoIdentityProviderClient();
-            serviceCollection.AddTransient<ICognitoClient>(_=> new CognitoClient(client));
+            serviceCollection.AddTransient<ICognitoClient>(_=> new CognitoClient(client, new CognitoSettings
+            {
+                CognitoAppPoolClientId = settings.CognitoPoolId
+            }));
             serviceCollection.AddTransient<IGoogleApiClient, GoogleApiClient>();
             serviceCollection.AddTransient<IRegisterUserUseCase, RegisterUserUseCase>();
         }

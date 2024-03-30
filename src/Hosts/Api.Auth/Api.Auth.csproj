@@ -1,14 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
       <AWSProjectType>Lambda</AWSProjectType>
+      <UserSecretsId>e2e6dbbe-a504-4a6a-a87e-4aab128cfd1a</UserSecretsId>
   </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.3.1" />
-        <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.6.0" />
+      <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.3.1" />
+      <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.6.0" />
+      <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
+      <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.103.1" />
         <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.7.303.1" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Adapters\Cognito\Cognito.csproj" />

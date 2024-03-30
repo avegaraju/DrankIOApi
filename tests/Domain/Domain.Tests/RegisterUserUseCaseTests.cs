@@ -1,8 +1,6 @@
 using AutoFixture;
 using Domain.Ports;
 using Domain.Users;
-using DrankIO.Domain.Ports;
-using DrankIO.Domain.Users;
 using FluentAssertions;
 using Moq;
 using System;

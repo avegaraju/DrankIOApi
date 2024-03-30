@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DrankIO.Domain.Ports
+namespace Domain.Ports
 {
     public interface ICognitoClient
     {

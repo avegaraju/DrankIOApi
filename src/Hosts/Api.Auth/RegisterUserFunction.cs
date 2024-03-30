@@ -4,15 +4,11 @@ using System.Text.Json;
 using Amazon.Lambda.Core;
 using System;
 using Microsoft.Extensions.DependencyInjection;
-using DrankIO.Domain.Users;
+using Domain.Users;
 using System.Net;
 
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
-
-namespace DrankIO.Auth
+namespace Auth
 {
-
     public class RegisterUserFunction
     {
         IServiceProvider _serviceProvider;
