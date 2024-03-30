@@ -56,5 +56,5 @@ Resources:
   CognitoUserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-        Domain: travelogue.auth
+        Domain: auth.travelogue.io
         UserPoolId: !Ref CognitoUserPool
