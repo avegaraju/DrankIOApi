@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using Cognito;
+using Amazon.Runtime.Internal.Transform;
+using System.Net.Http;
+using System.Text;
+using System.Xml.Linq;
+using System.Text.Json;
 
 namespace Cognito
 {
@@ -29,26 +34,27 @@ namespace Cognito
 
         public async Task<string> GetToken(string accessCode)
         {
-            var exchangeRequest = new InitiateAuthRequest
-            {
-                AuthFlow = AuthFlowType.USER_SRP_AUTH,
-                AuthParameters = new Dictionary<string, string>
-            {
-                {"USERNAME", "google_user"},
-                {"PASSWORD", accessCode}
-            },
-                ClientId = _settings.CognitoAppPoolClientId
-            };
+            var tokenUrl = $"https://<your-cognito-domain>/oauth2/token";
 
-            try
+            var content = new StringContent($"grant_type=authorization_code&client_id={_settings.CognitoAppPoolClientId}&client_secret={_settings.CognitoAppPoolClientSecret}&code={accessCode}&redirect_uri={_settings.RedirectUri}", Encoding.UTF8, "application/x-www-form-urlencoded");
+
+            using (var httpClient = new HttpClient())
             {
-                var response = await _client.InitiateAuthAsync(exchangeRequest);
-                return response.AuthenticationResult.AccessToken;
+                var response = await httpClient.PostAsync(tokenUrl, content);
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var jsonDocument = JsonDocument.Parse(responseContent);
+                var root = jsonDocument.RootElement;
+                if (root.TryGetProperty("access_token", out var accessToken))
+                {
+                    return accessToken.GetString();
+                }
+                else
+                {
+                    Console.WriteLine("Failed to exchange code for token.");
+                    return null;
+                }
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+          
         }
     }
 }

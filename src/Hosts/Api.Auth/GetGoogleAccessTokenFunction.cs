@@ -31,7 +31,7 @@ namespace Api.Auth
             });
 
             var useCase = _serviceProvider.GetRequiredService<IGetGoogleAccessTokenUseCase>();
-            var accessToken = await useCase.ExecuteAsync(apiRequest.credentials);
+            var accessToken = await useCase.ExecuteAsync(apiRequest.Credentials);
 
             return new APIGatewayProxyResponse
             {

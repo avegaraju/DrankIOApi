@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
       <AWSProjectType>Lambda</AWSProjectType>
       <UserSecretsId>e2e6dbbe-a504-4a6a-a87e-4aab128cfd1a</UserSecretsId>
+      <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.3.1" />

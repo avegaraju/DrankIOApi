@@ -8,6 +8,7 @@ using System;
 using Api.Auth;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Domain.Tokens;
 
 namespace Auth
 {
@@ -50,10 +51,12 @@ namespace Auth
             IAmazonCognitoIdentityProvider client = new AmazonCognitoIdentityProviderClient();
             serviceCollection.AddTransient<ICognitoClient>(_=> new CognitoClient(client, new CognitoSettings
             {
-                CognitoAppPoolClientId = settings.CognitoPoolId
+                CognitoAppPoolClientId = settings.CognitoPoolId,
+                UserPoolId = settings.UserPoolId
             }));
             serviceCollection.AddTransient<IGoogleApiClient, GoogleApiClient>();
             serviceCollection.AddTransient<IRegisterUserUseCase, RegisterUserUseCase>();
+            serviceCollection.AddTransient<IGetGoogleAccessTokenUseCase, GetGoogleAccessTokenUseCase>();
         }
     }
 }

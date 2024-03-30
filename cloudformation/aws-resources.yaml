@@ -53,3 +53,8 @@ Resources:
         name: 'name'
         given_name: 'given_name'
         family_name: 'family_name'
+  CognitoUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+        Domain: travelogue.auth
+        UserPoolId: !Ref CognitoUserPool
